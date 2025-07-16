@@ -1,0 +1,13 @@
+const WEBSITE_TYPE_CONTACT = "contact";
+const WEBSITE_TYPE_BANNER = "banner";
+const WEBSITE_TYPE_EVENTS = "events";
+const WEBSITE_TYPE_ADS = "ads";
+const WEBSITE_YOUTUBE_VIDEO = "youtube_video";
+
+export {
+  WEBSITE_TYPE_CONTACT,
+  WEBSITE_TYPE_BANNER,
+  WEBSITE_TYPE_EVENTS,
+  WEBSITE_TYPE_ADS,
+  WEBSITE_YOUTUBE_VIDEO,
+};

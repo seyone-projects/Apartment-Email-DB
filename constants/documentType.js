@@ -1,0 +1,3 @@
+const DOCUMENT_TYPE_BY_LAW = "BY LAW";
+
+export { DOCUMENT_TYPE_BY_LAW }
