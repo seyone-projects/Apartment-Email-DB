@@ -1,0 +1,13 @@
+export const SUPER_ADMIN = "Super Admin";
+export const ADMIN = "Admin";
+export const OWNER = "Owner";
+export const RENTAL = "Rental";
+export const STAFF = "staff";
+export const PROFILE_TYPE_ADMIN = "Admin";
+export const PROFILE_TYPE_RESIDENT = "Resident";
+export const BUILDER = "Builder";
+export const IFM = "Ifm";
+export const EC = "Ec";
+export const MC = "Mc";
+export const ECM = "ECM";
+export const ALL_USER = [SUPER_ADMIN, BUILDER, EC, MC, IFM, OWNER, RENTAL];
