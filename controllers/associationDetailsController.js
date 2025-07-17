@@ -4,7 +4,7 @@ function getEmails(users) {
 
 export async function updatePettyCashLimit(req, res, next) {
   try {
-    const { isOneMail, userData, newContent, users } = req.body;
+    const { isOneMail, userData, newContent, emailList } = req.body;
 
     const emailContent = `
         <p>Dear Admin,</p>
@@ -16,7 +16,7 @@ export async function updatePettyCashLimit(req, res, next) {
         <p>Thanks!</p>
       `;
 
-    const emailList = getEmails(users);
+    // const emailList = getEmails(users);
 
     await sendEMail(
       "Bank details updated notification",
