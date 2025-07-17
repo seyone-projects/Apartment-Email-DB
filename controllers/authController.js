@@ -66,7 +66,7 @@ export async function createStaff(req, res, next) {
 
 export async function validateOTP(req, res, next) {
   try {
-    const { isOneMail, updateStatus, token, toMail } = req.body;
+    const { isOneMail, updateStatus } = req.body;
     const association = await Association.findOne({});
 
     const adminEmailContent = `
@@ -212,8 +212,6 @@ export async function updateDocumentStatus(req, res, next) {
           userData.blockId?.blockName || ""
         } - ${userData.flatId?.flatNo || ""} Registration Approved`;
 
-        // Update flat as booked
-        await Flat.findByIdAndUpdate(userData?.flatId?._id, { isBooked: true });
       }
     } else {
       // Document rejected
@@ -319,7 +317,7 @@ export async function updateUserStatus(req, res, next) {
 
 export async function forgotPassword(req, res, next) {
   try {
-    const { isOneMail, user, token, toMail } = req.body;
+    const { isOneMail, user, token } = req.body;
     const association = await Association.findOne({});
 
     const resetContent = `      
@@ -346,7 +344,7 @@ export async function forgotPassword(req, res, next) {
 
 export async function reVerifyTrigger(req, res, next) {
   try {
-    const { isOneMail, updateData, otp, toMail } = req.body;
+    const { isOneMail, updateData, otp } = req.body;
     const association = await Association.findOne({});
 
     const otpEmailContent = `
@@ -385,7 +383,7 @@ export async function reVerifyTrigger(req, res, next) {
 
 export async function resendOtp(req, res, next) {
   try {
-    const { isOneMail, updateData, otp, toMail } = req.body;
+    const { isOneMail, updateData, otp } = req.body;
     const association = await Association.findOne({});
 
     const otpEmailContent = `

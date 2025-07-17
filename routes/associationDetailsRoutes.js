@@ -4,7 +4,7 @@ const router = Router();
 import {
   updateAmount,
   updatePettyCashLimit,
-} from "../controllers/associationDetailsController";
+} from "../controllers/associationDetailsController.js";
 
 router.route("/amount/update").post(updateAmount);
 
