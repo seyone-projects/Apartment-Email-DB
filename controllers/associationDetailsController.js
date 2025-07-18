@@ -1,3 +1,5 @@
+import { sendEMail } from "../constants/mailservices";
+
 function getEmails(users) {
   return users.map((user) => user.email);
 }
@@ -16,12 +18,10 @@ export async function updatePettyCashLimit(req, res, next) {
         <p>Thanks!</p>
       `;
 
-    // const emailList = getEmails(users);
-
-    await sendEMail(
-      "Bank details updated notification",
-      emailList,
-      emailContent
+    await Promise.allSettled(
+      emailList.map((email) =>
+        sendEMail("Bank details updated notification", [email], emailContent)
+      )
     );
 
     return res.status(200).json({ status: true });
