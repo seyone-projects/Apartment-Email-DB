@@ -1,7 +1,7 @@
+import { sendEMail } from "../constants/mailservices";
+
 export async function updateDocumentStatus(req, res, next) {
   try {
-    const id = req.params.id;
-
     const {
       isOneMail,
       status,

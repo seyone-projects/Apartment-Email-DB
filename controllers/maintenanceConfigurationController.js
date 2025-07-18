@@ -1,6 +1,5 @@
 import { sendEMail } from "../constants/mailservices.js";
 import { handleErrors } from "../utils/appError.js";
-import Association from "../models/associationModel.js";
 import { APP_URL } from "../config.js";
 
 export async function createMaintenanceConfiguration(req, res) {
@@ -18,11 +17,16 @@ export async function createMaintenanceConfiguration(req, res) {
       <p>Thanks!</p>
     `;
 
-    await sendEMail(
-      "Reminder Notification For Maintenance",
-      emailList,
-      emailContent
+    await Promise.allSettled(
+      emailList.map((email) =>
+        sendEMail(
+          "Reminder Notification For Maintenance",
+          [email],
+          emailContent
+        )
+      )
     );
+
     return res.status(200).json({ status: true });
   } catch (err) {
     return handleErrors(err, res);
