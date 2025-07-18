@@ -29,11 +29,16 @@ export async function createNotification(req, res, next) {
                 <p>End Time:${endTime}</p>
                 <p>Venue:${venue}</p>
                 `;
-      sendEMail(
-        NOTIFICATION_ASSOCIATION_MEETING + " Notification",
-        emailList,
-        emailContent,
-        file ? [{ filename: file.originalname, content: file.buffer }] : []
+
+      await Promise.allSettled(
+        emailList.map((email) =>
+          sendEMail(
+            NOTIFICATION_ASSOCIATION_MEETING + " Notification",
+            email,
+            emailContent,
+            file ? [{ filename: file.originalname, content: file.buffer }] : []
+          )
+        )
       );
     }
 
