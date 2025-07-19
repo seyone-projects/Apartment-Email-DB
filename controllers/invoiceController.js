@@ -1,4 +1,4 @@
-import { sendEMail } from "../constants/mailservices";
+import { sendEMail } from "../constants/mailservices.js";
 
 export const sendInvoice = async (req, res, next) => {
     try {

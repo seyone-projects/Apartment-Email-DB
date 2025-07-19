@@ -1,4 +1,4 @@
-import { sendEMail } from "../constants/mailservices";
+import { sendEMail } from "../constants/mailservices.js";
 
 export async function updateDocumentStatus(req, res, next) {
   try {

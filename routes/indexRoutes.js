@@ -15,7 +15,7 @@ import ticketRoutes from "./ticketRoutes.js";
 const router = Router();
 
 // routes path define here
-router.use("/auth", authRoutes);
+router.use("/users", authRoutes);
 router.use("/owner", ownerDocumentRoutes);
 router.use("/tickets", ticketRoutes);
 router.use("/association/details", associationDetailsRoutes);

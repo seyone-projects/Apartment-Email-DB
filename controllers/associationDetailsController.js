@@ -1,4 +1,4 @@
-import { sendEMail } from "../constants/mailservices";
+import { sendEMail } from "../constants/mailservices.js";
 
 function getEmails(users) {
   return users.map((user) => user.email);
