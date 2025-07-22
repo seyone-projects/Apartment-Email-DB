@@ -80,22 +80,22 @@ export async function sendEMail(subject, toMail, htmlcontent, attachments) {
       }
       try {
         console.log("error.....3..",error)
-        const safeError = {
-          message: error?.message,
-          stack: error?.stack,
-          code: error?.code,
-          raw: error ? JSON.stringify(error) : null
-        };
+        // const safeError = {
+        //   message: error?.message,
+        //   stack: error?.stack,
+        //   code: error?.code,
+        //   raw: error ? JSON.stringify(error) : null
+        // };
 
-        await EmailFailedLog.create({
-          to: toMail,
-          subject: subject,
-          content: FINAL_HTML,
-          attachments: attachments || [],
-          error: safeError,
-          association: association?._id,
-          attemptTime: new Date()
-        });
+        // await EmailFailedLog.create({
+        //   to: toMail,
+        //   subject: subject,
+        //   content: FINAL_HTML,
+        //   attachments: attachments || [],
+        //   error: safeError,
+        //   association: association?._id,
+        //   attemptTime: new Date()
+        // });
 
         
 
