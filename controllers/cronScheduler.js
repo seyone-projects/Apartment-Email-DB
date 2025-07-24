@@ -9,7 +9,7 @@ import { sendEMail } from "../constants/mailservices.js";
 import moment from "moment";
 import xlsx from "xlsx";
 import fs from "fs";
-import { EC, MC, OWNER, SUPER_ADMIN } from "../constants/roles.js";
+import { EC, MC, OWNER, SUPER_ADMIN, RENTAL } from "../constants/roles.js";
 import Flat from "../models/flatModal.js";
 import {
   NOTIFICATION_ASSOCIATION_MEETING,

@@ -67,3 +67,61 @@ export async function createTicket(req, res, next) {
     return handleErrors(err, res);
   }
 }
+export async function updateTicket(req, res, next){
+  try{
+    const association = await Association.findOne({});
+        var mailContent = `
+
+        <html>
+            <body>
+
+                <p>Dear ${obj?.userId?.name},</p>
+
+                <b>Ticket Details:</b>
+
+                <ul>
+                    <li>Ticket ID: ${obj?.ticketDetailsId}</li>
+                    <li>Issue Type: ${obj?.issueType}</li>
+                    <li>Nature of Issue : ${obj?.natureOfIssue}</li>
+                    <li>Description: ${obj?.description}</li>
+                    <li>Date Submitted: ${moment(obj?.createdAt).format(
+                      "DD-MM-YYYY"
+                    )}</li>
+                    <li>Status: ${
+                      obj?.status === "R"
+                        ? "Requested"
+                        : obj?.status === "C"
+                        ? "Completed"
+                        : obj?.status === "P"
+                        ? "Processing"
+                        : ""
+                    }</li>
+                </ul>
+                <br />
+
+                <p>We appreciate your patience as we work to resolve this matter.
+                    If you have any additional information or concerns, please create fresh ticket or call us</p>
+
+                <p>Best Regards,</p>
+
+                <p>[Your Name]</p>
+                <p>[Your Position]</p>
+                <p>${association?.name}</p>
+                <p>[Contact Information]</p>
+
+            </body>
+        </html>
+    `;
+        var mailSubject = `Ticket Confirmation: ${obj?.natureOfIssue} Status Update`;
+        var mailResponse = await sendEMail(
+          mailSubject,
+          obj?.userId?.email,
+          mailContent
+        );
+
+  return res.status(200).json({ status: true });
+
+  }catch(err){
+     return handleErrors(err, res);
+  }
+}
