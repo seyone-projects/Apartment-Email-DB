@@ -67,6 +67,7 @@ export async function createStaff(req, res, next) {
 export async function validateOTP(req, res, next) {
   try {
     const { isOneMail, updateStatus } = req.body;
+  
     const association = await Association.findOne({});
 
     const adminEmailContent = `
@@ -91,6 +92,7 @@ export async function validateOTP(req, res, next) {
         </body>
         </html>
         `;
+       
 
     const customerEmailContent = `
         <!DOCTYPE html>
@@ -113,18 +115,21 @@ export async function validateOTP(req, res, next) {
         </body>
         </html>
         `;
+        
 
-    var mailSubject = `Approval for ${updateStatus.name} - ${updateStatus.residentType} - ${updateStatus.phoneNumber}`;
+    var mailSubject = `Approval for ${updateStatus.name} - ${updateStatus.residentType} - ${updateStatus.phoneNumber}`;        
     var mailResponse1 = await sendEMail(
       mailSubject,
-      DEFAULT_ADMIN_USER,
+      updateStatus.email,
       adminEmailContent
     );
+     
     var mailResponse2 = await sendEMail(
       `Sign Up for ${association?.name} - ${updateStatus.name} - ${updateStatus.residentType} - ${updateStatus.phoneNumber}`,
       updateStatus.email,
       customerEmailContent
     );
+    
 
     return res.status(200).json({ status: true });
   } catch (err) {
