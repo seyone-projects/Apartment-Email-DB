@@ -4,6 +4,18 @@ import Association from "../models/associationModel.js";
 import { handleErrors } from "../utils/appError.js";
 import jwt from "jsonwebtoken";
 
+const getDocumentLabel = (key) => {
+  const labels = {
+    construction: "Construction Document",
+    saleDeed: "Sale Deed",
+    parkingLetter: "Parking Letter",
+    aadharFront: "Aadhar Card (Front)",
+    aadharBack: "Aadhar Card (Back)",
+  };
+
+  return labels[key] || "Unknown Document";
+};
+
 export async function signUp(req, res, next) {
   try {
     const { isOneMail, name, otp, toMail } = req.body;
@@ -28,7 +40,7 @@ export async function signUp(req, res, next) {
           </body>
           </html>
         `;
-    var mailSubject = `Your One-Time Password (OTP) for ${association?.name} Login`;
+    var mailSubject = `Your One-Time Password (OTP) for ${association?.name} Login`;    
     if (mailSubject && otpEmailContent)
       var mailResponse = await sendEMail(mailSubject, toMail, otpEmailContent);
 
@@ -194,12 +206,13 @@ export async function updateTenantStatus(req, res, next) {
 
 export async function updateDocumentStatus(req, res, next) {
   try {
-    const { isOneMail, status, allAccepted, userData } = req.body;
+   
+    const { isOneMail, status, allAccepted, allRejected,documentType,userData } = req.body;
     const association = await Association.findOne({});
 
     let mailContent = "";
     let mailSubject = "";
-
+    
     if (status) {
       // Document accepted
       if (allAccepted) {
@@ -219,6 +232,7 @@ export async function updateDocumentStatus(req, res, next) {
 
       }
     } else {
+    
       // Document rejected
       mailContent = `
         <!DOCTYPE html>
@@ -233,11 +247,13 @@ export async function updateDocumentStatus(req, res, next) {
         </body>
         </html>
       `;
+     
 
       mailSubject = `${userData.name} - ${userData?.blockId?.blockName} - ${
         userData?.flatId?.flatNo
       } ${getDocumentLabel(documentType)} Rejected`;
 
+    
       if (allRejected) {
         mailContent = `
           <!DOCTYPE html>
@@ -256,6 +272,7 @@ export async function updateDocumentStatus(req, res, next) {
     }
 
     if (mailSubject && mailContent) {
+     
       await sendEMail(mailSubject, userData.email, mailContent);
     }
 
